@@ -39,6 +39,26 @@ router.get('/login',(req,res)=>{
 })
 
 // 登录操作
-
+router.post('/login',async (req,res)=>{
+    const {username,password} = req.body
+    // 查询数据库
+    const data =await UserModel.findOne({username:username,password: md5(password)})
+    if(data){
+        // res.json({
+        //     code: 200,
+        //     msg: '登录成功',
+        //     data:data
+        // })
+        res.render('success',{msg:'登陆成功',url: '/account'})
+    }else {
+        // res.status(500)
+        //     .json({
+        //     code: '1001',
+        //     msg: '登陆失败，请稍后再试~',
+        //     data: null
+        // })
+        res.render('success',{msg:'登陆失败',url: '/account'})
+    }
+})
 
 module.exports = router;
