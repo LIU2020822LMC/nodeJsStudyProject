@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加记录</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft Yahei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        /* 科幻背景：深色渐变 + 科技网格纹理 */
+        body {
+            padding: 20px 30px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a237e 50%, #283593 100%);
+            background-image:
+                    linear-gradient(rgba(10, 14, 39, 0.7) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(10, 14, 39, 0.7) 1px, transparent 1px),
+                    linear-gradient(135deg, #0a0e27 0%, #1a237e 50%, #283593 100%);
+            background-size: 30px 30px, 30px 30px, cover;
+        }
+        /* 科幻标题：霓虹发光效果 */
+        .page-title {
+            font-size: 2.4em;
+            color: #00d4ff;
+            font-weight: normal;
+            margin-bottom: 32px;
+            text-align: center;
+            text-shadow:
+                    0 0 10px #00d4ff,
+                    0 0 20px #00d4ff,
+                    0 0 30px #0099cc;
+            letter-spacing: 2px;
+        }
+        /* 表单容器：毛玻璃 + 发光边框 */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            box-shadow:
+                    0 0 40px rgba(0, 212, 255, 0.2),
+                    inset 0 0 20px rgba(0, 212, 255, 0.1);
+        }
+        .form-item {
+            margin-bottom: 28px;
+        }
+        /* 标签：科幻荧光色 */
+        .form-item label {
+            display: block;
+            font-size: 1.15em;
+            color: #80d8ff;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(128, 216, 255, 0.5);
+        }
+        /* 输入框/下拉框/文本域：半透明 + 发光边框 */
+        .form-item input[type="text"],
+        .form-item input[type="date"],
+        .form-item input[type="number"],
+        .form-item select,
+        .form-item textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            border-radius: 8px;
+            font-size: 1.05em;
+            color: #e0f7ff;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        /* 输入框聚焦：高亮发光 */
+        .form-item input:focus,
+        .form-item select:focus,
+        .form-item textarea:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow:
+                    0 0 15px rgba(0, 212, 255, 0.7),
+                    inset 0 0 8px rgba(0, 212, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        /* 下拉框兼容样式 + 科幻配色 */
+        .form-item select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%2300d4ff" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            cursor: pointer;
+        }
+        /* 文本域样式 */
+        .form-item textarea {
+            resize: vertical;
+            min-height: 85px;
+        }
+        /* 提交按钮：霓虹渐变 + 脉冲发光 */
+        .add-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #00d4ff 0%, #0099cc 100%);
+            color: #0a0e27;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+        /* 按钮悬浮：增强发光 + 上浮动画 */
+        .add-button:hover {
+            background: linear-gradient(90deg, #00e5ff 0%, #00b3e6 100%);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.8), 0 0 40px rgba(0, 212, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        /* 按钮点击：下沉反馈 */
+        .add-button:active {
+            transform: translateY(0);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+        }
+        /* 输入框占位符颜色 */
+        ::placeholder {
+            color: rgba(128, 216, 255, 0.5) !important;
+        }
+    </style>
+</head>
+<body>
+<h1 class="page-title">添加记录</h1>
+<div class="form-container">
+    <form action="/account" class="form" method="post" id="addForm">
+        <div class="form-item">
+            <label>事项</label>
+            <input type="text" name="title" id="item" required>
+        </div>
+        <div class="form-item">
+            <label>发生时间</label>
+            <!-- 优化为日期选择器，更易用 -->
+            <input type="date" name="time" id="time" required>
+        </div>
+        <div class="form-item">
+            <label>类型</label>
+            <select name="type" id="type">
+                <option value="-1">支出</option>
+                <option value="1">收入</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label>金额</label>
+            <!-- 优化为数字输入框，只能输数字 -->
+            <input type="number" name="account" id="account" step="0.01" required>
+        </div>
+        <div class="form-item">
+            <label>备注</label>
+            <textarea name="remarks" id="remarks"></textarea>
+        </div>
+        <button class="add-button" type="submit">添加</button>
+    </form>
+</div>
+
+<script>
+    // // 修复表单提交：阻止默认跳转，模拟提交成功
+    // const form = document.getElementById('addForm');
+    // form.addEventListener('submit', function(e) {
+    //     // 阻止表单默认跳转（因为没有后端接口，所以禁止跳转）
+    //     e.preventDefault();
+    //     // 弹出提交成功提示
+    //     alert('记录添加成功！');
+    //     // 清空表单
+    //     form.reset();
+    // });
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "accounts": [
+    {
+      "id": "vA_eirUdz",
+      "title": "nihao",
+      "time": "2356-02-06",
+      "type": "-1",
+      "account": "4562",
+      "remarks": "测试啦"
+    },
+    {
+      "title": "发工资",
+      "time": "2026-03-15",
+      "type": "1",
+      "account": "4000",
+      "remarks": "终于发工资了"
+    }
+  ]
+}

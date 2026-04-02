@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <!-- 引入科技感字体 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif; /* 科技感无衬线字体 */
+        }
+
+        /* 页面背景：深色渐变+网格纹理，营造科幻氛围 */
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a237e 100%);
+            background-image:
+                    linear-gradient(rgba(10, 14, 39, 0.8) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(10, 14, 39, 0.8) 1px, transparent 1px),
+                    linear-gradient(135deg, #0a0e27 0%, #1a237e 100%);
+            background-size: 40px 40px, 40px 40px, cover;
+            overflow: hidden;
+        }
+
+        /* 注册容器：毛玻璃+发光边框 */
+        .register-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            box-shadow:
+                    0 0 30px rgba(0, 212, 255, 0.2),
+                    inset 0 0 15px rgba(0, 212, 255, 0.1);
+            backdrop-filter: blur(10px); /* 毛玻璃效果 */
+        }
+
+        /* 标题：霓虹发光效果 */
+        .register-container h1 {
+            text-align: center;
+            color: #00d4ff;
+            font-size: 2.5rem;
+            margin-bottom: 35px;
+            text-shadow:
+                    0 0 10px rgba(0, 212, 255, 0.8),
+                    0 0 20px rgba(0, 212, 255, 0.5);
+            letter-spacing: 2px;
+        }
+
+        /* 输入框组 */
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #80d8ff;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        /* 输入框：半透明+渐变边框 */
+        .input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            border-radius: 8px;
+            color: #e0f7ff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(128, 216, 255, 0.5);
+        }
+
+        /* 输入框聚焦：发光效果 */
+        .input-group input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow:
+                    0 0 12px rgba(0, 212, 255, 0.6),
+                    inset 0 0 8px rgba(0, 212, 255, 0.2);
+        }
+
+        /* 注册按钮：渐变+脉冲发光 */
+        .register-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #00d4ff 0%, #0099cc 100%);
+            border: none;
+            border-radius: 8px;
+            color: #0a0e27;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+        }
+
+        /* 按钮 hover：更亮+上浮动画 */
+        .register-btn:hover {
+            background: linear-gradient(90deg, #00e5ff 0%, #00b3e6 100%);
+            box-shadow:
+                    0 0 25px rgba(0, 212, 255, 0.8),
+                    0 0 35px rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* 按钮点击：下沉反馈 */
+        .register-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+<form action="/reg" method="post">
+    <div class="register-container">
+        <h1>注册</h1>
+        <div class="input-group">
+            <label for="username">用户名</label>
+            <input type="text" name="username" placeholder="请输入用户名">
+        </div>
+        <div class="input-group">
+            <label for="password">密码</label>
+            <input type="password" name="password" placeholder="请输入密码">
+        </div>
+        <button class="register-btn" type="submit">注册</button>
+    </div>
+</form>
+
+</body>
+</html>
