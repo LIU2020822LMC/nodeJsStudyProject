@@ -49,6 +49,10 @@ router.post('/login',async (req,res)=>{
         //     msg: '登录成功',
         //     data:data
         // })
+
+        // 写入session
+        req.session.username = data.username
+        req.session._id = data._id
         res.render('success',{msg:'登陆成功',url: '/account'})
     }else {
         // res.status(500)
@@ -57,6 +61,7 @@ router.post('/login',async (req,res)=>{
         //     msg: '登陆失败，请稍后再试~',
         //     data: null
         // })
+
         res.render('success',{msg:'登陆失败',url: '/account'})
     }
 })
