@@ -158,13 +158,45 @@
             transform: translateY(0);
             box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
         }
+        /* 新增：退出登录按钮 - 危险红霓虹样式（次按钮） */
+        .btn-logout {
+            color: #ff4757;
+            background: rgba(255, 71, 87, 0.1); /* 半透明背景 */
+            text-align: center;
+            line-height: 50px;
+            width: 110px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bolder;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 2px solid #ff4757; /* 红色边框 */
+            box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-logout:hover {
+            background: rgba(255, 71, 87, 0.2);
+            color: #fff;
+            box-shadow: 0 0 25px rgba(255, 71, 87, 0.6);
+            transform: translateY(-2px);
+        }
+        .btn-logout:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
 <div style="display: flex; align-items: center; justify-content: space-between;">
     <h1 class="page-title">记账本</h1>
-    <a  href="/account/create" class="btn-primary">添加账单</a>
+    <div style="display: flex;  gap: 12px; align-items: flex-end;">
+        <!-- 添加账单：蓝色填充主按钮 -->
+        <a href="/account/create" class="btn-primary">添加账单</a>
+        <!-- 退出登录：红色描边样式 -->
+        <a href="/logout" class="btn-logout">退出登录</a>
+    </div>
 </div>
+
 <% accounts.forEach(item=> { %>
     <div class="record-card">
         <div class="record-date-bar <%= item.type === -1 ? 'expense' : 'income'%>"><%= moment(item.time).format('YYYY-MM-DD') %></div>
@@ -194,8 +226,6 @@
             }
         })
     })
-
-
 </script>
 </body>
 </html>
