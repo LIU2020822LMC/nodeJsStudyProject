@@ -14,6 +14,7 @@ var app = express();
 // 导入accout接口路由文件
 const accoutRouter = require('./routes/api/account')
 const authRouter = require('./routes/web/auth')
+const authApiRouter = require('./routes/api/auth')
 
 // 给 EJS 模板全局可用
 app.locals.moment = moment;
@@ -47,10 +48,12 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/api', accoutRouter);
+app.use('/api', authApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  // 响应 404
+  res.render('404')
 });
 
 // error handler

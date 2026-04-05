@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+    <!-- 引入图标字体（和成功页一致） -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        /* 统一科幻背景：深色渐变 + 科技网格纹理（和项目完全一致） */
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a237e 50%, #283593 100%);
+            background-image:
+                    linear-gradient(rgba(10, 14, 39, 0.7) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(10, 14, 39, 0.7) 1px, transparent 1px),
+                    linear-gradient(135deg, #0a0e27 0%, #1a237e 50%, #283593 100%);
+            background-size: 30px 30px, 30px 30px, cover;
+        }
+
+        /* 404卡片：毛玻璃 + 霓虹发光边框（和成功页样式统一） */
+        .error-card {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 50px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            backdrop-filter: blur(12px);
+            text-align: center;
+            animation: fadeIn 0.6s ease forwards;
+            max-width: 400px;
+            width: 90%;
+            box-shadow:
+                    0 0 40px rgba(0, 212, 255, 0.2),
+                    inset 0 0 20px rgba(0, 212, 255, 0.1);
+        }
+
+        /* 错误图标：科幻霓虹红 + 发光效果（区别于成功页的绿色） */
+        .error-icon {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            margin: 0 auto 25px;
+            font-size: 40px;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
+            animation: scaleIn 0.5s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        /* 404大标题：霓虹荧光红 + 文字发光 */
+        .error-title {
+            font-size: 48px;
+            color: #ff4757;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow:
+                    0 0 10px rgba(255, 71, 87, 0.8),
+                    0 0 20px rgba(255, 71, 87, 0.5);
+            letter-spacing: 2px;
+        }
+
+        /* 描述文字：淡蓝色科技感（和成功页统一） */
+        .error-desc {
+            font-size: 16px;
+            color: #80d8ff;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            text-shadow: 0 0 5px rgba(128, 212, 255, 0.3);
+        }
+
+        /* 返回按钮：完全统一科幻霓虹蓝渐变 + 发光交互 */
+        .back-btn {
+            display: inline-block;
+            padding: 12px 35px;
+            background: linear-gradient(90deg, #00d4ff 0%, #0099cc 100%);
+            color: #0a0e27;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(90deg, #00e5ff 0%, #00b3e6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.8);
+        }
+
+        /* 淡入动画（和成功页完全一致） */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 图标缩放动画（和成功页完全一致） */
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+<div class="error-card">
+    <!-- 错误图标 -->
+    <div class="error-icon">
+        <i class="fas fa-xmark"></i>
+    </div>
+    <!-- 404标题 -->
+    <h1 class="error-title">404</h1>
+    <!-- 提示文字 -->
+    <p class="error-desc">页面未找到，你访问的地址不存在哦~</p>
+    <!-- 返回首页按钮 -->
+    <a href="/account" class="back-btn">返回首页</a>
+</div>
+<script src="//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js"></script>
+</body>
+</html>

@@ -4,6 +4,13 @@ const moment = require('moment');
 const AccountModel = require('../../modules/AccountModel');
 const checkLoginMiddleware = require('../../middlewares/checkLoginMiddleware');
 
+
+// 添加首页路由规则
+router.get('/',(req,res)=>{
+  // 重定向 /account
+  res.redirect('/account');
+})
+
 // 记账本的列表
 router.get('/account',checkLoginMiddleware, async (req, res) => { // 加 async 关键字
   try {
