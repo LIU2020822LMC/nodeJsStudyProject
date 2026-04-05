@@ -3,9 +3,11 @@ var router = express.Router();
 const moment = require('moment');
 const AccountModel = require('../../modules/AccountModel');
 const {Types} = require("mongoose");
+// 导入中间件
+const checkTokenMiddleware = require('../../middlewares/checkTokenMiddleware');
 
 // 记账本的列表
-router.get('/account', async (req, res) => { // 加 async 关键字
+router.get('/account', checkTokenMiddleware, async (req, res) => { // 加 async 关键字
     try {
         // 1. 执行查询，直接 await exec()
         const result = await AccountModel.find().sort({ time: -1 }).exec();
@@ -29,7 +31,7 @@ router.get('/account', async (req, res) => { // 加 async 关键字
 
 
 // 新增记录
-router.post('/account', async (req,res)=>{
+router.post('/account',checkTokenMiddleware, async (req,res)=>{
     try {
         // 异步创建数据，无回调函数
         await AccountModel.create({
@@ -53,7 +55,7 @@ router.post('/account', async (req,res)=>{
 })
 
 //删除记录
-router.delete('/account/:id', async (req, res) => {
+router.delete('/account/:id',checkTokenMiddleware, async (req, res) => {
     //获取 params 的 id 参数
     let id = req.params.id;
     if (!Types.ObjectId.isValid(id)) {
@@ -81,7 +83,7 @@ router.delete('/account/:id', async (req, res) => {
 });
 
 // 获取单个账单信息
-router.get('/account/:id', async (req,res)=>{
+router.get('/account/:id',checkTokenMiddleware, async (req,res)=>{
     let id = req.params.id;
     if (!Types.ObjectId.isValid(id)) {
         return res.status(400).json({
@@ -107,7 +109,7 @@ router.get('/account/:id', async (req,res)=>{
 })
 
 // 更新单个账单信息
-router.patch('/account/:id', async (req,res)=>{
+router.patch('/account/:id',checkTokenMiddleware, async (req,res)=>{
     let id = req.params.id;
     if (!Types.ObjectId.isValid(id)) {
         return res.status(400).json({
