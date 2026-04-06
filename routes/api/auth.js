@@ -5,6 +5,7 @@ const UserModel = require('../../modules/UserModel')
 const md5 = require('md5');
 // 导入 jwt
 const jwt = require('jsonwebtoken');
+const { secret } = require('../../config/config');
 
 // 登录操作
 router.post('/login',async (req,res)=>{
@@ -15,7 +16,7 @@ router.post('/login',async (req,res)=>{
         const token = jwt.sign({
             username: data.username,
             _id: data._id
-        }, 'LMC', {
+        }, secret, {
             expiresIn: 60 * 60 * 24 * 3
         });
         res.json({

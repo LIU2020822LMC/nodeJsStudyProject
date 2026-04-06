@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,17 +12,19 @@
             padding: 0;
             font-family: "Microsoft Yahei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
+
         /* 科幻背景：深色渐变 + 科技网格纹理（和添加记录页统一） */
         body {
             padding: 25px 35px;
             min-height: 100vh;
             background: linear-gradient(135deg, #0a0e27 0%, #1a237e 50%, #283593 100%);
             background-image:
-                    linear-gradient(rgba(10, 14, 39, 0.7) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(10, 14, 39, 0.7) 1px, transparent 1px),
-                    linear-gradient(135deg, #0a0e27 0%, #1a237e 50%, #283593 100%);
+                linear-gradient(rgba(10, 14, 39, 0.7) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(10, 14, 39, 0.7) 1px, transparent 1px),
+                linear-gradient(135deg, #0a0e27 0%, #1a237e 50%, #283593 100%);
             background-size: 30px 30px, 30px 30px, cover;
         }
+
         /* 科幻标题：霓虹发光 + 科技边框 */
         .page-title {
             font-size: 3em;
@@ -31,11 +34,12 @@
             padding-bottom: 22px;
             border-bottom: 1px solid rgba(0, 212, 255, 0.3);
             text-shadow:
-                    0 0 10px #00d4ff,
-                    0 0 20px #00d4ff,
-                    0 0 30px #0099cc;
+                0 0 10px #00d4ff,
+                0 0 20px #00d4ff,
+                0 0 30px #0099cc;
             letter-spacing: 2px;
         }
+
         /* 账单卡片：毛玻璃效果 + 霓虹发光边框 */
         .record-card {
             border: 1px solid rgba(0, 212, 255, 0.4);
@@ -47,30 +51,194 @@
             box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
             transition: all 0.3s ease;
         }
+
         /* 卡片悬浮：轻微上浮 + 增强发光 */
         .record-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
         }
+
         /* 日期栏：科幻霓虹配色 + 发光效果 */
         .record-date-bar {
             padding: 16px 22px;
             font-size: 1.4em;
             font-weight: 500;
-            text-shadow: 0 0 5px rgba(255,255,255,0.3);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        /* 修改按钮：精致霓虹药丸样式 */
+        .edit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 12px;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 1px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .edit-btn:hover {
+            background: #ffffff;
+            color: #1a237e;
+            border-color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+            transform: scale(1.1) translateY(-1px);
+        }
+
+        .edit-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* 模态框样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 39, 0.85);
+            backdrop-filter: blur(15px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid #00d4ff;
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.4), inset 0 0 20px rgba(0, 212, 255, 0.1);
+            position: relative;
+            transform: scale(0.9);
+            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalPop {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .modal-title {
+            color: #00d4ff;
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .modal-form-item {
+            margin-bottom: 20px;
+        }
+
+        .modal-form-item label {
+            display: block;
+            color: #80d8ff;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        .modal-form-item input,
+        .modal-form-item select,
+        .modal-form-item textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .modal-form-item input:focus,
+        .modal-form-item select:focus,
+        .modal-form-item textarea:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-btns {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-save {
+            background: linear-gradient(90deg, #00d4ff 0%, #0099cc 100%);
+            color: #0a0e27;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-save:hover {
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         /* 支出：霓虹红 */
         .record-date-bar.expense {
             background: linear-gradient(90deg, #ff4757, #ff3742);
             color: #ffffff;
             box-shadow: inset 0 0 10px rgba(255, 71, 87, 0.5);
         }
+
         /* 收入：霓虹绿 */
         .record-date-bar.income {
             background: linear-gradient(90deg, #2ed573, #1dd19f);
             color: #ffffff;
             box-shadow: inset 0 0 10px rgba(46, 213, 115, 0.5);
         }
+
         /* 卡片内容区：半透明科幻背景 */
         .record-content {
             display: flex;
@@ -79,17 +247,20 @@
             padding: 22px;
             background: rgba(255, 255, 255, 0.03);
         }
+
         .record-left {
             display: flex;
             align-items: center;
             gap: 25px;
         }
+
         /* 事项描述：科技蓝白色 */
         .record-desc {
             font-size: 1.5em;
             color: #e0f7ff;
             text-shadow: 0 0 3px rgba(0, 212, 255, 0.3);
         }
+
         /* 类型标签：霓虹发光效果 */
         .record-type-tag {
             padding: 6px 14px;
@@ -99,12 +270,15 @@
             font-weight: 500;
             box-shadow: 0 0 8px currentColor;
         }
+
         .record-type-tag.expense {
             background: linear-gradient(90deg, #ffa726, #ff9800);
         }
+
         .record-type-tag.income {
             background: linear-gradient(90deg, #4caf50, #2e7d32);
         }
+
         /* 金额：荧光蓝 */
         .record-amount {
             font-size: 1.5em;
@@ -112,6 +286,7 @@
             text-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
             margin-right: 15px;
         }
+
         /* 删除按钮：科幻霓虹红 + 发光动画 */
         .delete-btn {
             display: inline-block;
@@ -128,10 +303,12 @@
             box-shadow: 0 0 10px rgba(255, 71, 87, 0.6);
             transition: all 0.2s ease;
         }
+
         .delete-btn:hover {
             transform: scale(1.15);
             box-shadow: 0 0 15px rgba(255, 71, 87, 0.9);
         }
+
         /* 添加账单按钮：霓虹蓝渐变 + 脉冲发光 */
         .btn-primary {
             color: #0a0e27;
@@ -149,19 +326,23 @@
             transition: all 0.3s ease;
             border: none;
         }
+
         .btn-primary:hover {
             background: linear-gradient(90deg, #00e5ff 0%, #00b3e6 100%);
             box-shadow: 0 0 25px rgba(0, 212, 255, 0.8);
             transform: translateY(-2px);
         }
+
         .btn-primary:active {
             transform: translateY(0);
             box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
         }
+
         /* 新增：退出登录按钮 - 危险红霓虹样式（次按钮） */
         .btn-logout {
             color: #ff4757;
-            background: rgba(255, 71, 87, 0.1); /* 半透明背景 */
+            background: rgba(255, 71, 87, 0.1);
+            /* 半透明背景 */
             text-align: center;
             line-height: 50px;
             width: 110px;
@@ -171,64 +352,184 @@
             font-weight: bolder;
             text-decoration: none;
             border-radius: 5px;
-            border: 2px solid #ff4757; /* 红色边框 */
+            border: 2px solid #ff4757;
+            /* 红色边框 */
             box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
             transition: all 0.3s ease;
         }
+
         .btn-logout:hover {
             background: rgba(255, 71, 87, 0.2);
             color: #fff;
             box-shadow: 0 0 25px rgba(255, 71, 87, 0.6);
             transform: translateY(-2px);
         }
+
         .btn-logout:active {
             transform: translateY(0);
         }
     </style>
 </head>
+
 <body>
-<div style="display: flex; align-items: center; justify-content: space-between;">
-    <h1 class="page-title">记账本</h1>
-    <div style="display: flex;  gap: 12px; align-items: flex-end;">
-        <!-- 添加账单：蓝色填充主按钮 -->
-        <a href="/account/create" class="btn-primary">添加账单</a>
-        <!-- 退出登录：红色描边样式 -->
-        <form action="/logout" method="post">
-            <button href="/logout" class="btn-logout">退出登录</button>
-        </form>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <h1 class="page-title">记账本</h1>
+        <div style="display: flex;  gap: 12px; align-items: flex-end;">
+            <!-- 添加账单：蓝色填充主按钮 -->
+            <a href="/account/create" class="btn-primary">添加账单</a>
+            <!-- 退出登录：红色描边样式 -->
+            <form action="/logout" method="post">
+                <button href="/logout" class="btn-logout">退出登录</button>
+            </form>
 
-    </div>
-</div>
-
-<% accounts.forEach(item=> { %>
-    <div class="record-card">
-        <div class="record-date-bar <%= item.type === -1 ? 'expense' : 'income'%>"><%= moment(item.time).format('YYYY-MM-DD') %></div>
-        <div class="record-content">
-            <div class="record-left">
-                <div class="record-desc"><%= item.title %></div>
-                <div class="record-type-tag <%= item.type === -1 ? 'expense' : 'income'%>"><%= item.type === -1 ? '支出' : '收入'%></div>
-            </div>
-            <!-- 金额 + 删除X号 -->
-            <div style="display: flex; align-items: center;">
-                <div class="record-amount"><%= item.account %> 元</div>
-                <!-- 按照图片写法的删除a标签 -->
-                <a  href="/account/<%= item._id %>" class="delete-btn">X</a>
-            </div>
         </div>
     </div>
-<%  })%>
 
-<script>
-    const delBtns = document.querySelectorAll('.delete-btn');
-    delBtns.forEach(item=>{
-        item.addEventListener('click',(e)=>{
-            if(confirm('你确定要删除该条记录吗？')){
-                return true
-            }else {
-                e.preventDefault()
-            }
-        })
-    })
-</script>
+    <% accounts.forEach(item=> { %>
+        <div class="record-card">
+            <div class="record-date-bar <%= item.type === -1 ? 'expense' : 'income'%>">
+                <span>
+                    <%= moment(item.time).format('YYYY-MM-DD') %>
+                </span>
+                <a href="javascript:;" class="edit-btn" data-id="<%= item._id %>" data-title="<%= item.title %>"
+                    data-time="<%= moment(item.time).format('YYYY-MM-DD') %>" data-type="<%= item.type %>"
+                    data-account="<%= item.account %>" data-remarks="<%= item.remarks %>">修改</a>
+            </div>
+            <div class="record-content">
+                <div class="record-left">
+                    <div class="record-desc">
+                        <%= item.title %>
+                    </div>
+                    <div class="record-type-tag <%= item.type === -1 ? 'expense' : 'income'%>">
+                        <%= item.type===-1 ? '支出' : '收入' %>
+                    </div>
+                </div>
+                <!-- 金额 + 删除X号 -->
+                <div style="display: flex; align-items: center;">
+                    <div class="record-amount">
+                        <%= item.account %> 元
+                    </div>
+                    <!-- 按照图片写法的删除a标签 -->
+                    <a href="/account/<%= item._id %>" class="delete-btn">X</a>
+                </div>
+            </div>
+        </div>
+        <% })%>
+
+            <!-- 修改记录模态框 -->
+            <div class="modal-overlay" id="editModal">
+                <div class="modal-content">
+                    <h2 class="modal-title">编辑账单记录</h2>
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <div class="modal-form-item">
+                            <label>事项</label>
+                            <input type="text" id="editTitle" required>
+                        </div>
+                        <div class="modal-form-item">
+                            <label>发生时间</label>
+                            <input type="date" id="editTime" required>
+                        </div>
+                        <div class="modal-form-item">
+                            <label>类型</label>
+                            <select id="editType">
+                                <option value="-1">支出</option>
+                                <option value="1">收入</option>
+                            </select>
+                        </div>
+                        <div class="modal-form-item">
+                            <label>金额</label>
+                            <input type="number" id="editAccount" step="0.01" required>
+                        </div>
+                        <div class="modal-form-item">
+                            <label>备注</label>
+                            <textarea id="editRemarks" rows="3"></textarea>
+                        </div>
+                        <div class="modal-btns">
+                            <button type="button" class="modal-btn btn-cancel" id="cancelBtn">取消</button>
+                            <button type="submit" class="modal-btn btn-save">保存修改</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <script>
+                // 删除功能
+                const delBtns = document.querySelectorAll('.delete-btn');
+                delBtns.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        if (!confirm('你确定要删除该条记录吗？')) {
+                            e.preventDefault();
+                        }
+                    })
+                });
+
+                // 编辑功能
+                const editModal = document.getElementById('editModal');
+                const editForm = document.getElementById('editForm');
+                const editBtns = document.querySelectorAll('.edit-btn');
+                const cancelBtn = document.getElementById('cancelBtn');
+
+                // 打开模态框并填入数据
+                editBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const {id, title, time, type, account, remarks} = btn.dataset;
+                        document.getElementById('editId').value = id;
+                        document.getElementById('editTitle').value = title;
+                        document.getElementById('editTime').value = time;
+                        document.getElementById('editType').value = type;
+                        document.getElementById('editAccount').value = account;
+                        document.getElementById('editRemarks').value = remarks || '';
+
+                        editModal.style.display = 'flex';
+                    });
+                });
+
+                // 关闭模态框
+                const closeModal = () => {
+                    editModal.style.display = 'none';
+                    editForm.reset();
+                };
+
+                cancelBtn.addEventListener('click', closeModal);
+                editModal.addEventListener('click', (e) => {
+                    if (e.target === editModal) closeModal();
+                });
+
+                // 提交修改 (使用 PATCH 接口)
+                editForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const id = document.getElementById('editId').value;
+                    const data = {
+                        title: document.getElementById('editTitle').value,
+                        time: document.getElementById('editTime').value,
+                        type: Number(document.getElementById('editType').value),
+                        account: Number(document.getElementById('editAccount').value),
+                        remarks: document.getElementById('editRemarks').value
+                    };
+
+                    try {
+                        const response = await fetch(`/api/account/${id}`, {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+
+                        const resData = await response.json();
+                        if (resData.code === 200) {
+                            alert('修改成功！');
+                            window.location.reload();
+                        } else {
+                            alert('修改失败：' + resData.msg);
+                        }
+                    } catch (err) {
+                        console.error('修改失败:', err);
+                        alert('网络错误，请稍后再试');
+                    }
+                });
+            </script>
 </body>
+
 </html>

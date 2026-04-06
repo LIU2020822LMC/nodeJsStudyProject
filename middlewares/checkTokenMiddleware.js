@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { secret } = require('../config/config');
 
 module.exports = (req,res,next) => {
     // 获取token
@@ -11,7 +12,7 @@ module.exports = (req,res,next) => {
         })
     }else {
         // 校验token
-        jwt.verify(token, 'LMC', (err, data) => {
+        jwt.verify(token, secret, (err, data) => {
             if (err) {
                 return res.json({
                     code: 401,
@@ -19,6 +20,8 @@ module.exports = (req,res,next) => {
                     data: null
                 })
             }else {
+                // 保存用户信息
+                req.user = data;
                 next()
             }
         })
