@@ -16,8 +16,8 @@
 ### 1. 克隆项目
 
 ```bash
-git clone https://github.com/your-username/LmcAccounts.git
-cd LmcAccounts
+git clone https://github.com/LIU2020822LMC/nodeJsStudyProject.git
+cd nodeJsStudyProject
 ```
 
 ### 2. 环境要求
